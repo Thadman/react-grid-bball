@@ -49,6 +49,7 @@ html {
   border-bottom: 1px solid #616161;
   margin-bottom: 10px;
   background-color: #212121;
+  align-items: center;
 }
 
 .a {
@@ -108,6 +109,8 @@ html {
   padding-right: 15px;
   border: 1px solid #616161;
   margin-top: 5px;
+  flex-flow: row wrap;
+  flex: 0 1 auto;
 }
 
 .playerMargin {
@@ -231,14 +234,24 @@ h6 {
   color: #616161;
 }
 
-/* @media only screen and (max-width: 480px) {
-  .wrapper {
-  }
-
+@media only screen and (max-width: 650px) {
   .header-wrapper {
     display: block;
   }
   .a {
     width: 100%;
   }
-} */
+
+  .b {
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: space-between;
+  }
+
+  [class*="b-"] {
+    margin-right: 5px;
+  }
+}
