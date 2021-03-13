@@ -602,11 +602,7 @@ export default function FetchData() {
       <div className="d-1">
         <>
           <div className="d-1-2">
-            <h1
-              style={{ fontSize: "30px", color: "#fff", textAlign: "center" }}
-            >
-              LAST TEN GAMES
-            </h1>
+            <h1>LAST TEN GAMES</h1>
           </div>
           <div className="d-1-2">
             <select value={value} onChange={handleChange}>
