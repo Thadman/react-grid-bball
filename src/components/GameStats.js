@@ -1,27 +1,6 @@
 import React from "react";
 
 const GameStats = (props) => {
-  // const { value, id } = props;
-  // console.log(value, id);
-  // console.log(props);
-
-  // const getSomeStats = async () => {
-  //   const response = await fetch(
-  //     `https://www.balldontlie.io/api/v1/players?search=${value}`
-  //   );
-  //   const data = await response.json();
-  //   // console.log(data.data[0].id);
-
-  //   const secondFetch = await fetch(
-  //     `https://www.balldontlie.io/api/v1/stats?seasons[]=2020&player_ids[]=${id}&per_page=10`
-  //   );
-  //   const secondData = await secondFetch.json();
-  //   // console.log(secondData);
-  //   console.log(value, id);
-  // };
-
-  // getSomeStats();
-
   return (
     <>
       <table>
@@ -86,3 +65,24 @@ export default GameStats;
 //   getStats();
 //   console.log(data);
 // };
+
+// const { value, id } = props;
+// console.log(value, id);
+// console.log(props);
+
+// const getSomeStats = async () => {
+//   const response = await fetch(
+//     `https://www.balldontlie.io/api/v1/players?search=${value}`
+//   );
+//   const data = await response.json();
+//   // console.log(data.data[0].id);
+
+//   const secondFetch = await fetch(
+//     `https://www.balldontlie.io/api/v1/stats?seasons[]=2020&player_ids[]=${id}&per_page=10`
+//   );
+//   const secondData = await secondFetch.json();
+//   // console.log(secondData);
+//   console.log(value, id);
+// };
+
+// getSomeStats();

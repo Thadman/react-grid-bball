@@ -24,7 +24,8 @@ export default function FetchData() {
   const [stephTeamName, setStephTeamName] = useState([]);
   const [giannisTeamName, setGiannisTeamName] = useState([]);
   const [tenGames, setTenGames] = useState([]);
-  const [value, setValue] = useState("Stephen Curry");
+  const [value, setValue] = useState([]);
+  const [newValue, setNewValue] = useState("");
 
   // this is the data for the players season averages
   const getHarden = async () => {
@@ -118,7 +119,6 @@ export default function FetchData() {
   const handleChange = async (event) => {
     setValue(event.target.value);
     const sendValue = event.target.value;
-    console.log(event.target.value);
 
     const response = await fetch(
       `https://www.balldontlie.io/api/v1/players?search=${sendValue}`
@@ -143,7 +143,8 @@ export default function FetchData() {
           `https://www.balldontlie.io/api/v1/players?search=${query}`
         );
         const data = await response.json();
-        // console.log(data);
+        console.log(query);
+        setNewValue(query);
         setStats(data.data[0]);
         setId(data.data[0].id);
         const id = data.data[0].id;
@@ -179,7 +180,7 @@ export default function FetchData() {
           `https://www.balldontlie.io/api/v1/stats?seasons[]=2020&player_ids[]=${id}&per_page=10`
         );
         const tenGamesData = await tenGames.json();
-        console.log(tenGamesData.data);
+        // console.log(tenGamesData.data);
         setTenGames(tenGamesData.data);
         setId(tenGamesData.data[0].player.id);
 
@@ -630,10 +631,10 @@ export default function FetchData() {
           </div>
           <div className="d-1-2">
             <select value={value} onChange={handleChange}>
-              <option value="James Harden">James Harden</option>
               <option value="Stephen Curry">Steph Curry</option>
+              <option value="James Harden">James Harden</option>
               <option value="Giannis Antetokounmpo">Giannis Anteto..</option>
-              {loading && <option value={value}>{value}</option>}
+              {loading && <option value={newValue}>{newValue}</option>}
             </select>
           </div>
         </>
