@@ -1,16 +1,26 @@
 import React from "react";
 
 const GameStats = (props) => {
+  // const { value, id } = props;
+  // console.log(value, id);
   // console.log(props);
 
-  // const getStats = async () => {
+  // const getSomeStats = async () => {
   //   const response = await fetch(
-  //     `https://www.balldontlie.io/api/v1/stats?seasons[]=2020&player_ids[]=${props.id}&per_page=10`
+  //     `https://www.balldontlie.io/api/v1/players?search=${value}`
   //   );
   //   const data = await response.json();
-  //   getStats();
-  //   console.log(data);
+  //   // console.log(data.data[0].id);
+
+  //   const secondFetch = await fetch(
+  //     `https://www.balldontlie.io/api/v1/stats?seasons[]=2020&player_ids[]=${id}&per_page=10`
+  //   );
+  //   const secondData = await secondFetch.json();
+  //   // console.log(secondData);
+  //   console.log(value, id);
   // };
+
+  // getSomeStats();
 
   return (
     <>
@@ -66,3 +76,13 @@ const GameStats = (props) => {
 };
 
 export default GameStats;
+
+// const getStats = async (props) => {
+//   console.log(props);
+//   const response = await fetch(
+//     `https://www.balldontlie.io/api/v1/stats?seasons[]=2020&player_ids[]=${props.id}&per_page=10`
+//   );
+//   const data = await response.json();
+//   getStats();
+//   console.log(data);
+// };

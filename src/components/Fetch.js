@@ -24,7 +24,7 @@ export default function FetchData() {
   const [stephTeamName, setStephTeamName] = useState([]);
   const [giannisTeamName, setGiannisTeamName] = useState([]);
   const [tenGames, setTenGames] = useState([]);
-  const [value, setValue] = useState("Steph Curry");
+  const [value, setValue] = useState("Stephen Curry");
 
   // this is the data for the players season averages
   const getHarden = async () => {
@@ -103,7 +103,7 @@ export default function FetchData() {
     getTenGames();
   }, []);
 
-  // resetting the data
+  // resetting the data for the queried player
   const handlePlayerReset = (event) => {
     event.preventDefault();
     setLoading(false);
@@ -114,9 +114,23 @@ export default function FetchData() {
     setQuery("");
   };
 
-  // for the select tag
-  const handleChange = (event) => {
+  // for the select tag - the id is coming in as undefined?
+  const handleChange = async (event) => {
     setValue(event.target.value);
+    const sendValue = event.target.value;
+    console.log(event.target.value);
+
+    const response = await fetch(
+      `https://www.balldontlie.io/api/v1/players?search=${sendValue}`
+    );
+    const data = await response.json();
+    const id = data.data[0].id;
+
+    const newResponse = await fetch(
+      `https://www.balldontlie.io/api/v1/stats?seasons[]=2020&player_ids[]=${id}&per_page=10`
+    );
+    const newData = await newResponse.json();
+    setTenGames(newData.data);
   };
 
   // handling the request when the query is submitted
@@ -133,7 +147,6 @@ export default function FetchData() {
         setStats(data.data[0]);
         setId(data.data[0].id);
         const id = data.data[0].id;
-        console.log(id);
 
         // getting the season averages for the player that was queried
         const playerId = await fetch(
@@ -155,14 +168,22 @@ export default function FetchData() {
 
         // this is the data of the games that the team has played, with results etc.
         const teamGames = await fetch(
-          `https://www.balldontlie.io/api/v1/games?seasons[]=2020&team_ids[]=${teamId}&per_page=50`
+          `https://www.balldontlie.io/api/v1/games?seasons[]=2020&team_ids[]=${teamId}&per_page=10`
         );
         const teamGameStats = await teamGames.json();
         // console.log(teamGameStats);
         setTeamStats(teamGameStats);
 
-        // need to swap the query around so i can send off in the correct format.
+        // getting the ten games of the new queried player
+        const tenGames = await fetch(
+          `https://www.balldontlie.io/api/v1/stats?seasons[]=2020&player_ids[]=${id}&per_page=10`
+        );
+        const tenGamesData = await tenGames.json();
+        console.log(tenGamesData.data);
+        setTenGames(tenGamesData.data);
+        setId(tenGamesData.data[0].player.id);
 
+        // need to swap the query around so i can send off in the correct format.
         let correctFormat = query.split(" ").reverse().join("/");
         // console.log(correctFormat);
 
@@ -175,8 +196,11 @@ export default function FetchData() {
         setPlayerPic(playerPicShow.url);
         // console.log(playerPic);
         setLoading(true);
+        // console.log(query);
+        setValue(query);
       } catch (error) {
         console.log(error);
+        setError(true);
       }
       return getData;
     };
@@ -607,9 +631,9 @@ export default function FetchData() {
           <div className="d-1-2">
             <select value={value} onChange={handleChange}>
               <option value="James Harden">James Harden</option>
-              <option value="Steph Curry">Steph Curry</option>
-              <option value="Giannis">Giannis Anteto..</option>
-              {loading && <option value={query}>{query}</option>}
+              <option value="Stephen Curry">Steph Curry</option>
+              <option value="Giannis Antetokounmpo">Giannis Anteto..</option>
+              {loading && <option value={value}>{value}</option>}
             </select>
           </div>
         </>
